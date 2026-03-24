@@ -1,10 +1,9 @@
-import type { Metadata } from "next";
-import "@/css/globals.css";
+import '@/css/globals.css';
+
+import type { Metadata } from 'next';
 
 const siteUrl =
-  process.env.NODE_ENV === 'production'
-    ? ''
-    : 'http://localhost:3000';
+  process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -35,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body >{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

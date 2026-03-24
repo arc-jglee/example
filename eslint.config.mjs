@@ -24,7 +24,7 @@ export default defineConfig([
   ]),
 
   {
-    files: ['src/**/*.{ts,tsx,mjs}'],
+    files: ['**/*.{ts,tsx,mts,cts}'],
     languageOptions: {
       parserOptions: {
         project: ['./tsconfig.json'],
