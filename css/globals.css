@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "./font.css";
+@import 'tailwindcss';
+@import './font.css';
 
 :root {
   --background: #ffffff;
@@ -18,4 +18,3 @@ body {
   color: var(--foreground);
   font-family: 'Pretendard', Arial, Helvetica, sans-serif;
 }
-
