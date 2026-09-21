@@ -1,0 +1,369 @@
+/**
+ * ADS Colors — Primitive Palette
+ *
+ * 값의 출처는 Figma "ADS Colors"이고, **이 파일이 코드에서의 단일 소스다.**
+ * 팔레트가 갱신되면 Figma에서 다시 export해서 이 파일을 교체한다.
+ *
+ * 예외: `brand`는 ADS 샘플 파랑이 아니라 arc 고유 네이비 램프다. 기준색은
+ * 600(#172A88)이고, 25는 예전 11스텝 램프의 50, 900은 950이다(기준색 자리가
+ * 700 → 600으로 옮겨지면서 한 스텝씩 당겼다). 950은 대응 원본이 없어 이 램프
+ * 자신의 900→950 채널 비율을 한 번 더 적용해 파생했다.
+ *
+ * 구성: 25개 팔레트 × 12스텝(`25` ~ `950`) + 절대 흑백 2개 = 302개.
+ * - **Primary** — brand / error / warning / success
+ * - **Neutral** — gray / neutral / stone / zinc / slate
+ * - **Secondary** — red · orange · yellow · lime · green · emerald · teal ·
+ *   cyan · sky · blue · indigo · violet · purple · fuchsia · pink · rose
+ *
+ * 보조색을 "제2의 테마색" 하나로 지정하지 않고 16개 팔레트를 전부 깔아두는
+ * 구조다. 뱃지·차트·카테고리처럼 색으로 종류를 구분해야 할 때 필요한 색을
+ * 골라 쓰면 되고, 그래서 이 레이어에는 의미가 없다 — 의미 부여는 semantic.css
+ * 한 곳에서만 일어난다(그래야 다크테마 전환도 한 곳에서 끝난다).
+ *
+ * ⚠️ Tailwind v4와의 관계
+ * Tailwind 기본 테마도 같은 이름(`--color-red-500` 등)을 쓰지만, 앱의
+ * global.css가 `tailwindcss` **다음에** 이 파일을 import하므로 ADS 값이 이긴다.
+ * 이름이 겹치는 팔레트도 값이 늘 같지는 않다 — gray·slate·indigo는 ADS 고유
+ * 값이라 Tailwind와 다르다. 그래서 겹치는 팔레트까지 전부 명시한다(Tailwind는
+ * 유틸리티 리터럴이 스캔될 때만 해당 변수를 생성하므로, `var(--color-*)`를
+ * 동적으로 참조하는 코드에는 명시 정의가 필요하다 — radius/shadow와 같은 이유).
+ *
+ * ⚠️ `25` 스텝은 Tailwind에 없다. `bg-red-25` 같은 유틸리티는 생성되지 않으므로
+ * `bg-[var(--color-red-25)]` 형태로 참조한다.
+ */
+:root {
+  /* Primary — 브랜드와 상태색. brand만 제품/브랜드에 따라 바뀌고,
+     error·warning·success는 의미가 고정된다. */
+  --color-brand-25: #f3f4fc;
+  --color-brand-50: #e2e6f8;
+  --color-brand-100: #c6cdf1;
+  --color-brand-200: #96a5ed;
+  --color-brand-300: #5e74e4;
+  --color-brand-400: #2543da;
+  --color-brand-500: #1e37b3;
+  --color-brand-600: #172a88;
+  --color-brand-700: #111f64;
+  --color-brand-800: #0b1441;
+  --color-brand-900: #070d2c;
+  --color-brand-950: #04081e;
+
+  --color-error-25: #fffbfa;
+  --color-error-50: #fef3f2;
+  --color-error-100: #fee4e2;
+  --color-error-200: #fecdca;
+  --color-error-300: #fda29b;
+  --color-error-400: #f97066;
+  --color-error-500: #f04438;
+  --color-error-600: #d92d20;
+  --color-error-700: #b42318;
+  --color-error-800: #912018;
+  --color-error-900: #7a271a;
+  --color-error-950: #55160c;
+
+  --color-warning-25: #fffcf5;
+  --color-warning-50: #fffaeb;
+  --color-warning-100: #fef0c7;
+  --color-warning-200: #fedf89;
+  --color-warning-300: #fec84b;
+  --color-warning-400: #fdb022;
+  --color-warning-500: #f79009;
+  --color-warning-600: #dc6803;
+  --color-warning-700: #b54708;
+  --color-warning-800: #93370d;
+  --color-warning-900: #7a2e0e;
+  --color-warning-950: #4e1d09;
+
+  --color-success-25: #f5fef5;
+  --color-success-50: #edfced;
+  --color-success-100: #def5de;
+  --color-success-200: #b5e6b6;
+  --color-success-300: #7dc97f;
+  --color-success-400: #5fb560;
+  --color-success-500: #4c9a4e;
+  --color-success-600: #458a46;
+  --color-success-700: #317032;
+  --color-success-800: #2c5a2e;
+  --color-success-900: #274f28;
+  --color-success-950: #1d391d;
+
+  /* Base — 특정 색상 계열에 속하지 않는 절대 흑백. */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Neutral — 텍스트·배경·테두리·아이콘의 기본 구조색. gray가 ADS 기본값이고,
+     한 제품 안에서는 하나만 골라 일관되게 쓴다. */
+  --color-gray-25: #fdfdfd;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f4f5f6;
+  --color-gray-200: #e9eaeb;
+  --color-gray-300: #d5d7da;
+  --color-gray-400: #a4a7ae;
+  --color-gray-500: #717680;
+  --color-gray-600: #535862;
+  --color-gray-700: #414651;
+  --color-gray-800: #252b37;
+  --color-gray-900: #181d27;
+  --color-gray-950: #121212;
+
+  --color-neutral-25: #fcfcfc;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a1a1a1;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+  --color-neutral-950: #0a0a0a;
+
+  --color-stone-25: #fdfdfc;
+  --color-stone-50: #fafaf9;
+  --color-stone-100: #f5f5f4;
+  --color-stone-200: #e7e5e4;
+  --color-stone-300: #d6d3d1;
+  --color-stone-400: #a6a09b;
+  --color-stone-500: #79716b;
+  --color-stone-600: #57534d;
+  --color-stone-700: #44403b;
+  --color-stone-800: #292524;
+  --color-stone-900: #1c1917;
+  --color-stone-950: #0c0a09;
+
+  --color-zinc-25: #fcfcfd;
+  --color-zinc-50: #f9f9fa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #9f9fa9;
+  --color-zinc-500: #71717b;
+  --color-zinc-600: #52525c;
+  --color-zinc-700: #3f3f47;
+  --color-zinc-800: #27272a;
+  --color-zinc-900: #18181b;
+  --color-zinc-950: #09090b;
+
+  --color-slate-25: #f8fafc;
+  --color-slate-50: #f1f5f9;
+  --color-slate-100: #e2e8f0;
+  --color-slate-200: #cbd5e1;
+  --color-slate-300: #a9b6c8;
+  --color-slate-400: #8292a8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  /* Secondary — 뱃지·태그·필터·카테고리·차트에서 정보의 유형이나 그룹을
+     구분하는 보조색. 화면의 시각적 위계를 흐리지 않도록 제한적으로 쓴다. */
+  --color-red-25: #fffafa;
+  --color-red-50: #fef2f2;
+  --color-red-100: #ffe2e2;
+  --color-red-200: #ffc9c9;
+  --color-red-300: #ffa2a2;
+  --color-red-400: #ff6467;
+  --color-red-500: #fb2c36;
+  --color-red-600: #e7000b;
+  --color-red-700: #c10007;
+  --color-red-800: #9f0712;
+  --color-red-900: #82181a;
+  --color-red-950: #460809;
+
+  --color-orange-25: #fffaf5;
+  --color-orange-50: #fff6ed;
+  --color-orange-100: #ffead5;
+  --color-orange-200: #fddcab;
+  --color-orange-300: #feb273;
+  --color-orange-400: #fd853a;
+  --color-orange-500: #fb6514;
+  --color-orange-600: #ec4a0a;
+  --color-orange-700: #c4320a;
+  --color-orange-800: #9c2a10;
+  --color-orange-900: #7e2410;
+  --color-orange-950: #511c10;
+
+  --color-yellow-25: #fffff5;
+  --color-yellow-50: #fefce8;
+  --color-yellow-100: #fef9c2;
+  --color-yellow-200: #fff085;
+  --color-yellow-300: #ffdf20;
+  --color-yellow-400: #fdc700;
+  --color-yellow-500: #f0b100;
+  --color-yellow-600: #d08700;
+  --color-yellow-700: #a65f00;
+  --color-yellow-800: #894b00;
+  --color-yellow-900: #733e0a;
+  --color-yellow-950: #432004;
+
+  --color-lime-25: #fbfff5;
+  --color-lime-50: #f7fee7;
+  --color-lime-100: #ecfcca;
+  --color-lime-200: #d8f999;
+  --color-lime-300: #bbf451;
+  --color-lime-400: #9ae600;
+  --color-lime-500: #7ccf00;
+  --color-lime-600: #5ea500;
+  --color-lime-700: #497d00;
+  --color-lime-800: #3c6300;
+  --color-lime-900: #35530e;
+  --color-lime-950: #192e03;
+
+  --color-green-25: #f8fefa;
+  --color-green-50: #f0fdf4;
+  --color-green-100: #dcfce7;
+  --color-green-200: #b9f8cf;
+  --color-green-300: #7bf1a8;
+  --color-green-400: #05df72;
+  --color-green-500: #00c950;
+  --color-green-600: #00a63e;
+  --color-green-700: #008236;
+  --color-green-800: #016630;
+  --color-green-900: #0d542b;
+  --color-green-950: #032e15;
+
+  --color-emerald-25: #f6fefa;
+  --color-emerald-50: #ecfdf5;
+  --color-emerald-100: #d0fae5;
+  --color-emerald-200: #a4f4cf;
+  --color-emerald-300: #5ee9b5;
+  --color-emerald-400: #00d492;
+  --color-emerald-500: #00bc7d;
+  --color-emerald-600: #009966;
+  --color-emerald-700: #007a55;
+  --color-emerald-800: #006045;
+  --color-emerald-900: #004f3b;
+  --color-emerald-950: #002c22;
+
+  --color-teal-25: #f8fefd;
+  --color-teal-50: #f0fdfa;
+  --color-teal-100: #cbfbf1;
+  --color-teal-200: #96f7e4;
+  --color-teal-300: #46ecd5;
+  --color-teal-400: #00d5be;
+  --color-teal-500: #00bba7;
+  --color-teal-600: #009689;
+  --color-teal-700: #00786f;
+  --color-teal-800: #005f5a;
+  --color-teal-900: #0b4f4a;
+  --color-teal-950: #022f2e;
+
+  --color-cyan-25: #f6ffff;
+  --color-cyan-50: #ecfeff;
+  --color-cyan-100: #cefafe;
+  --color-cyan-200: #a2f4fd;
+  --color-cyan-300: #53eafd;
+  --color-cyan-400: #00d3f3;
+  --color-cyan-500: #00b8db;
+  --color-cyan-600: #0092b8;
+  --color-cyan-700: #007595;
+  --color-cyan-800: #005f78;
+  --color-cyan-900: #104e64;
+  --color-cyan-950: #053345;
+
+  --color-sky-25: #f8fcff;
+  --color-sky-50: #f0f9ff;
+  --color-sky-100: #dff2fe;
+  --color-sky-200: #b8e6fe;
+  --color-sky-300: #74d4ff;
+  --color-sky-400: #00bcff;
+  --color-sky-500: #00a6f4;
+  --color-sky-600: #0084d1;
+  --color-sky-700: #0069a8;
+  --color-sky-800: #00598a;
+  --color-sky-900: #024a70;
+  --color-sky-950: #052f4a;
+
+  --color-blue-25: #f7fbff;
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bedbff;
+  --color-blue-300: #8ec5ff;
+  --color-blue-400: #51a2ff;
+  --color-blue-500: #2b7fff;
+  --color-blue-600: #155dfc;
+  --color-blue-700: #1447e6;
+  --color-blue-800: #193cb8;
+  --color-blue-900: #1c398e;
+  --color-blue-950: #162456;
+
+  --color-indigo-25: #f9fafe;
+  --color-indigo-50: #f2f4fc;
+  --color-indigo-100: #e1e7f8;
+  --color-indigo-200: #c9d5f4;
+  --color-indigo-300: #a4baec;
+  --color-indigo-400: #7897e2;
+  --color-indigo-500: #5370d7;
+  --color-indigo-600: #4459cc;
+  --color-indigo-700: #3b48ba;
+  --color-indigo-800: #353c98;
+  --color-indigo-900: #2f3679;
+  --color-indigo-950: #21234a;
+
+  --color-violet-25: #faf9ff;
+  --color-violet-50: #f5f3ff;
+  --color-violet-100: #ede9fe;
+  --color-violet-200: #ddd6ff;
+  --color-violet-300: #c4b4ff;
+  --color-violet-400: #a684ff;
+  --color-violet-500: #8e51ff;
+  --color-violet-600: #7f22fe;
+  --color-violet-700: #7008e7;
+  --color-violet-800: #5d0ec0;
+  --color-violet-900: #4d179a;
+  --color-violet-950: #2f0d68;
+
+  --color-purple-25: #fdfaff;
+  --color-purple-50: #faf5ff;
+  --color-purple-100: #f3e8ff;
+  --color-purple-200: #e9d4ff;
+  --color-purple-300: #dab2ff;
+  --color-purple-400: #c27aff;
+  --color-purple-500: #ad46ff;
+  --color-purple-600: #9810fa;
+  --color-purple-700: #8200db;
+  --color-purple-800: #6e11b0;
+  --color-purple-900: #59168b;
+  --color-purple-950: #3c0366;
+
+  --color-fuchsia-25: #fefaff;
+  --color-fuchsia-50: #fdf4ff;
+  --color-fuchsia-100: #fae8ff;
+  --color-fuchsia-200: #f6cfff;
+  --color-fuchsia-300: #f4a8ff;
+  --color-fuchsia-400: #ed6aff;
+  --color-fuchsia-500: #e12afb;
+  --color-fuchsia-600: #c800de;
+  --color-fuchsia-700: #a800b7;
+  --color-fuchsia-800: #8a0194;
+  --color-fuchsia-900: #721378;
+  --color-fuchsia-950: #4b004f;
+
+  --color-pink-25: #fef9fc;
+  --color-pink-50: #fdf2f8;
+  --color-pink-100: #fce7f3;
+  --color-pink-200: #fccee8;
+  --color-pink-300: #fda5d5;
+  --color-pink-400: #fb64b6;
+  --color-pink-500: #f6339a;
+  --color-pink-600: #e60076;
+  --color-pink-700: #c6005c;
+  --color-pink-800: #a3004c;
+  --color-pink-900: #861043;
+  --color-pink-950: #510424;
+
+  --color-rose-25: #fff8f9;
+  --color-rose-50: #fff1f2;
+  --color-rose-100: #ffe4e6;
+  --color-rose-200: #ffccd3;
+  --color-rose-300: #ffa1ad;
+  --color-rose-400: #ff637e;
+  --color-rose-500: #ff2056;
+  --color-rose-600: #ec003f;
+  --color-rose-700: #c70036;
+  --color-rose-800: #a50036;
+  --color-rose-900: #8b0836;
+  --color-rose-950: #4d0218;
+}

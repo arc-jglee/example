@@ -1,0 +1,47 @@
+/**
+ * Global/Primitive Token 진입점
+ *
+ * color / spacing / typography / radius / shadow의 primitive 레이어는
+ * Tailwind v4 기본 테마(`@theme default`, node_modules/tailwindcss/theme.css)가
+ * 이미 제공하므로 여기서 다시 정의하지 않음 (예: --color-blue-500, --spacing,
+ * --text-lg, --font-weight-semibold, --radius-lg, --shadow-md).
+ *
+ * 여기서는 Tailwind가 제공하지 않는 값만 추가로 정의:
+ * - z-index (레이어 우선순위)
+ * - border-width (border-color는 Tailwind 색상 팔레트를 그대로 사용)
+ * - radius / shadow 전체 스케일 (Tailwind는 해당 유틸리티 클래스가 스캔된
+ *   소스에 리터럴로 존재할 때만 --radius-*, --shadow-* 변수를 생성하므로,
+ *   var(--radius-*), var(--shadow-*)를 동적으로 참조하는 코드를 위해
+ *   여기서 직접 보강)
+ * - colors의 ADS 팔레트 전체 (Figma "ADS Colors" export에서 생성. 25개 팔레트 ×
+ *   12스텝: brand/error/warning/success, gray/neutral/stone/zinc/slate,
+ *   red~rose 16색). 이름이 Tailwind와 겹치는 팔레트도 값이 다를 수 있어
+ *   (gray·slate·indigo) 전부 명시하며, 이 파일이 tailwindcss 다음에
+ *   import되므로 ADS 값이 이긴다. 자세한 내용은 colors.css 헤더 참고
+ * - typography의 --font-size-*(Core) 및 --text-heading-*, --text-body-*,
+ *   --text-caption (용도 기반 semantic 별칭)
+ *
+ * semantic.css: 위 color primitive를 역할(--color-bg-*, --color-text-*,
+ * --color-border-*) 기준으로 재매핑한 계층. [data-theme="dark"]로 다크테마
+ * 전환. 반드시 colors.css 다음에 import.
+ *
+ * tw-animate-css: Tailwind v4 네이티브 `animate-in`/`animate-out` +
+ * `fade-*`/`zoom-*`/`slide-*` 유틸리티. Dialog/Sheet 등 Radix 오버레이의
+ * `data-[state=open]`/`data-[state=closed]`와 조합해서 쓴다 (Radix가 CSS
+ * 애니메이션이 끝날 때까지 언마운트를 미뤄주므로 별도 JS 타이밍 코드가
+ * 필요 없다). 구버전 `tailwindcss-animate`는 Tailwind v3용 JS 플러그인이라
+ * 이 프로젝트(v4)에는 안 맞아서 대신 이걸 쓴다.
+ *
+ * scrollbar.css: `.scrollbar-thin` 유틸리티 클래스. `border`/`text` 색
+ * 토큰을 참조하므로 semantic.css 다음에 둔다(값 자체는 var() 참조라
+ * import 순서가 실제로는 무관하지만, 읽는 순서를 그렇게 맞춘다).
+ */
+@import 'tw-animate-css';
+@import './z-index.css';
+@import './border.css';
+@import './radius.css';
+@import './shadow.css';
+@import './colors.css';
+@import './typography.css';
+@import './semantic.css';
+@import './scrollbar.css';

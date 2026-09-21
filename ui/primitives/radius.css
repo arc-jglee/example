@@ -1,0 +1,19 @@
+/**
+ * Radius Primitive: 경계값 보강
+ * - sm~4xl은 Tailwind 기본 테마 값과 동일하게 여기서 직접 정의.
+ *   (Tailwind는 해당 유틸리티 클래스가 스캔된 소스에 리터럴로 존재할 때만
+ *   --radius-* 변수를 생성하므로, var(--radius-*)를 동적으로 참조하는
+ *   코드에서는 값이 비어 무시될 수 있음)
+ * - none/full은 named 변수로 노출되지 않아(고정 유틸리티) 여기서 보강.
+ */
+:root {
+  --radius-none: 0px;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
+  --radius-full: 9999px;
+}

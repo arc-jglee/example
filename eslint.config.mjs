@@ -41,4 +41,28 @@ export default defineConfig([
       '@typescript-eslint/no-floating-promises': 'off',
     },
   },
+
+  // ui/는 arc-frontend-platform의 libs/ui를 그대로 옮겨온 디자인 시스템으로,
+  // 원본 저장소는 eslint-config-next를 쓰지 않아 React Compiler 기반
+  // react-hooks/refs, react-hooks/set-state-in-effect 규칙의 적용을 받지 않았다.
+  // 동작은 원본과 동일하므로 이 두 규칙만 낮춘다.
+  {
+    files: ['ui/**/*.{ts,tsx}'],
+    rules: {
+      'react-hooks/refs': 'off',
+      'react-hooks/set-state-in-effect': 'off',
+      // TanStack Table의 useReactTable()이 메모이즈 불가능한 함수를 반환하는
+      // 것은 라이브러리 특성이라 코드로 고칠 수 없는 정보성 경고다.
+      'react-hooks/incompatible-library': 'off',
+    },
+  },
+
+  // Storybook 스토리의 데모용 <img>는 실제 페이지가 아니라 next/image 최적화
+  // 대상이 아니다.
+  {
+    files: ['ui/**/*.stories.tsx'],
+    rules: {
+      '@next/next/no-img-element': 'off',
+    },
+  },
 ]);
