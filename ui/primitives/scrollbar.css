@@ -1,0 +1,47 @@
+/**
+ * 얇은 스크롤바 유틸리티
+ *
+ * Sheet처럼 폭이 좁은 패널에서는 브라우저 기본 스크롤바(특히 스크롤바가
+ * 항상 보이는 Windows/데스크톱)가 콘텐츠 폭을 눈에 띄게 잠식한다. 완전히
+ * 숨기지는 않는다 — 스크롤바 자체가 "더 볼 내용이 있다"는 유일한 단서인
+ * 경우가 많아, 숨기면 그 발견 가능성을 잃는다. 대신 얇고 옅게 다듬는다.
+ *
+ * Firefox는 `scrollbar-width`/`scrollbar-color`로, WebKit 계열(Chrome·
+ * Safari·Edge)은 `::-webkit-scrollbar*` 의사요소로 각각 대응해야 한다.
+ */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: var(--color-border-strong);
+  border-radius: 9999px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-tertiary);
+}
+
+/**
+ * 완전히 숨긴 스크롤바 — 스크롤은 그대로 되지만 막대는 그리지 않는다.
+ * 내비게이션 레일처럼 "여기 더 있다"는 발견 가능성보다 항상 떠 있는
+ * 좁은 폭에서의 시각적 깔끔함이 더 중요하다고 판단한 곳에만 쓴다
+ * (`.scrollbar-thin`이 기본값인 이유는 그 파일 상단 주석 참고).
+ */
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}

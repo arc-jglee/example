@@ -1,0 +1,14 @@
+/**
+ * Z-index Primitive Scale
+ * - Tailwind v4 기본 테마에는 named z-index 스케일이 없어 여기서 직접 정의.
+ * - 값 사이 100단위 여유를 둬서 특정 레이어 내부에 임시 보정값이 필요할 때 충돌을 피함.
+ */
+:root {
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-overlay: 1200;
+  --z-modal: 1300;
+  --z-popover: 1400;
+  --z-tooltip: 1500;
+  --z-toast: 1600;
+}

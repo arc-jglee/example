@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+@import '../ui/primitives/index.css';
+@import '../css/font.css';
+
+@source '../ui/**/*.{ts,tsx}';
+
+body {
+  font-family: 'Pretendard', ui-sans-serif, system-ui, sans-serif;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+}

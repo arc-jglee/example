@@ -1,0 +1,13 @@
+/**
+ * Border Width Primitive Scale
+ * - Tailwind v4 기본 테마는 border-*(0/2/4/8) 유틸리티는 제공하지만
+ *   재사용 가능한 named CSS 변수로는 노출하지 않아 여기서 직접 정의.
+ * - border-color는 팔레트 색상(Tailwind 기본 색상 스케일)을 그대로 사용하므로 별도 정의하지 않음.
+ */
+:root {
+  --border-width-0: 0px;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+  --border-width-8: 8px;
+}

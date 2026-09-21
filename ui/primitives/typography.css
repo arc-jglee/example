@@ -1,0 +1,27 @@
+/**
+ * Typography Semantic Scale
+ * - Core: 고정 픽셀 스케일(--font-size-12~32). 시맨틱 레이어가 참조하는 원시값.
+ * - Semantic: 용도 기반 별칭(--text-heading-xl 등). 컴포넌트는 Semantic만 참조.
+ * - Tailwind 기본 --text-xs~5xl(rem 기반)과는 별도 체계이며, 이름이 겹치지 않음.
+ */
+:root {
+  --font-size-12: 12px;
+  --font-size-13: 13px;
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+  --font-size-18: 18px;
+  --font-size-20: 20px;
+  --font-size-24: 24px;
+  --font-size-28: 28px;
+  --font-size-32: 32px;
+
+  --text-heading-xl: var(--font-size-32);
+  --text-heading-lg: var(--font-size-28);
+  --text-heading-md: var(--font-size-24);
+  --text-heading-sm: var(--font-size-20);
+  --text-heading-xs: var(--font-size-18);
+  --text-body-lg: var(--font-size-16);
+  --text-body-md: var(--font-size-14);
+  --text-body-sm: var(--font-size-13);
+  --text-caption: var(--font-size-12);
+}

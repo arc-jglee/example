@@ -1,0 +1,36 @@
+/**
+ * Shadow Primitive: Tailwind 기본 테마 값 보강
+ * - Tailwind는 해당 유틸리티 클래스(shadow-sm 등)가 스캔된 소스에
+ *   리터럴로 존재할 때만 --shadow-* 변수를 생성하므로, var(--shadow-*)를
+ *   동적으로 참조하는 코드를 위해 여기서 직접 보강.
+ */
+:root {
+  --shadow-2xs: 0 1px rgb(0 0 0 / 0.05);
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+/**
+ * 어두운 배경 위에서는 검은 그림자(rgb(0 0 0 / x))만으로 입체감을 표현하기 어려움.
+ * 검은 그림자의 불투명도를 높이고, 미세한 흰색 rim light를 더해 표면이
+ * 배경에서 살짝 들려 보이도록 재정의.
+ */
+[data-theme='dark'] {
+  --shadow-2xs: 0 1px rgb(255 255 255 / 0.06);
+  --shadow-xs: 0 1px 2px 0 rgb(255 255 255 / 0.06);
+  --shadow-sm:
+    0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(255 255 255 / 0.05);
+  --shadow-md:
+    0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(255 255 255 / 0.05);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.35), 0 4px 6px -4px rgb(255 255 255 / 0.05);
+  --shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(255 255 255 / 0.05);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+}
